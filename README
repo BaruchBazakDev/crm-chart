@@ -1,0 +1,20 @@
+pre:
+-------------
+1. kubernetes cluster
+2. kubctl
+3. helm - version 3+
+
+
+
+instructions:
+--------------
+1. run command : helm repo add bitnami https://charts.bitnami.com/bitnami
+2. run command : helm install my-release -f var.yaml bitnami/mongodb
+3. run command : helm install nginx-controller bitnami/nginx-ingress-controller
+4. run command : k apply -f .
+
+cronJob:
+before you apply cronjJob
+1. connect to primary pod 
+2. connection to host:
+   mongo "mongodb://<user>:<pass>@127.0.0.1/<database name>" 

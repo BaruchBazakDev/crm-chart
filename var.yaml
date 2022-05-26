@@ -1,0 +1,13 @@
+architecture: replicaset
+replicaCount: 3
+auth:
+  enabled: true
+  rootPassword: Lonos123$
+  rootUser: root
+  databases: ["crm-demo-db"]
+  usernames: ["baruch"]
+  passwords: ["1234Baruch"]
+persistence:
+  enabled: true
+
+

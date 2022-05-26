@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crm-demo-deployment
+  labels:
+    app: crm-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: crm-demo
+  template:
+    metadata:
+      labels:
+        app: crm-demo
+    spec:
+      containers:
+      - name: crm-demo
+        image: gcr.io/ancient-dragon-350608/demo-crm:1.1
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: crm-demo
+        - secretRef:
+            name: crm-demo

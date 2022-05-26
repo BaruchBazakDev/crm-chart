@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: "mongo-cleanup"
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongo-clean-app
+            image: mongo:5.0.8-focal
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - -c
+            - mongo --eval 'db.clients.remove({});' "mongodb://baruch:1234Baruch@my-release-mongodb-0.my-release-mongodb-headless:27017/crm-demo-db"
+          restartPolicy: OnFailure
