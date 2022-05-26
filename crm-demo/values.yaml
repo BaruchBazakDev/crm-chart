@@ -1,3 +1,13 @@
 configMaps:
   logLevel: info
   persistence: true
+
+service:
+  port: ""
+
+deployment:
+  replicaset: 3
+
+cronJob:
+  schedule: "0 0 * * *"
+

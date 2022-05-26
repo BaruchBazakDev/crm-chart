@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}-mongodb-cleanup
+spec:
+  schedule: {{ .Values.cronJob.schedule | default "0 0 * * *" | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongo-clean-app
+            image: mongo:5.0.8-focal
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/bash
+            - -c
+            - mongo --eval 'db.clients.remove({});' "mongodb://<user>:<password>@<pod name>.<service name>:<port>/<db name>"
+          restartPolicy: OnFailure
