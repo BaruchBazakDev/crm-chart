@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap
 data:
-  LOG_LEVEL: {{ .Values.configMaps.logLevel }}
-  PERSISTENCE: {{ .Values.configMaps.persistence }}
+  LOG_LEVEL: {{ .Values.configMaps.logLevel | quote }}
+  PERSISTENCE: {{ .Values.configMaps.persistence | quote }}
