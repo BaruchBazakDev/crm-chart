@@ -11,3 +11,8 @@ deployment:
 cronJob:
   schedule: "0 0 * * *"
 
+ingress:
+  ingressClassName: nginx
+  rules:
+    host: "crm-demo.ddns.net"
+
