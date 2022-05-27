@@ -1,18 +1,48 @@
+# configMaps variables for crm-demo app
 configMaps:
+  # Log level for app logs
   logLevel: info
+  # boolean value for persistence
   persistence: true
 
-service:
-  port: ""
 
+# service variables for crm-demo app
+service:
+  # Service type
+  type: ClusterIP
+  # A port that will be exposed in ClusterIP will make the app accessible
+  port: 80
+
+
+# deployment variables for crm-demo app
 deployment:
   replicaset: 3
+  request:
+    cpu: "90m"
+    memory: "55Mi"
 
+
+# cronJob variables for crm-demo app
 cronJob:
-  schedule: "0 0 * * *"
+  # Scheduling work, default every day on 00:00
+  schedule: "0 2 * * *"
+  # Mongo command to exec - default db.clients.remove({})
+  command: "db.clients.remove({});"
+  # Uri to primary mongo pod 
+  uri: "mongodb://baruch:1234Baruch@my-release-mongodb-0.my-release-mongodb-headless:27017/crm-demo-db"
+  
 
+# ingress variables (now on LB) 
 ingress:
+  enable: true
   ingressClassName: nginx
   rules:
     host: "crm-demo.ddns.net"
+    secretName: "crm-tls"
+    tls: true 
+
+# secrets variables for crm-demo app 
+secrets:
+  # mongo URI and user & password - ***Need to replace with the appropriate details for your database deployments***
+  mongodbUri: "mongodb://baruch:1234Baruch@my-release-mongodb-0.my-release-mongodb-headless:27017,my-release-mongodb-1.my-release-mongodb-headless:27017,my-release-mongodb-2.my-release-mongodb-headless:27017/crm-demo-db"
 

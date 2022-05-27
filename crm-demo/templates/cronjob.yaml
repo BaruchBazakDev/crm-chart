@@ -12,8 +12,9 @@ spec:
           - name: mongo-clean-app
             image: mongo:5.0.8-focal
             imagePullPolicy: IfNotPresent
-            command:
+            command: 
             - /bin/bash
             - -c
-            - mongo --eval 'db.clients.remove({});' "mongodb://<user>:<password>@<pod name>.<service name>:<port>/<db name>"
+            - mongo --eval {{ .Values.cronJob.command | quote }} {{ .Values.cronJob.uri | quote }}
           restartPolicy: OnFailure
+

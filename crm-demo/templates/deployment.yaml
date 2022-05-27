@@ -22,3 +22,20 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-configmap
+        - secretRef:
+            name: {{ .Release.Name }}-secret
+        resources:
+        {{- with .Values.deployment.request }} #checks if there is request 
+          requests:
+            cpu: {{ .cpu | default "100m" | quote }}
+            memory: {{ .memory | default "50Mi" | quote }}
+        {{- end }}
+        {{- if .Values.deployment.limit -}} #checks if there limit 
+          limits:
+            cpu: {{ .Values.deployment.limit.cpu | default "200m" | quote }}
+            memory: {{ .Values.deployment.limit.memory | default "100Mi" | quote }}
+        {{ else }}
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        {{- end -}} 
