@@ -1,6 +1,6 @@
 pre:
 -------------
-1. kubernetes cluster
+1. kubernetes cluster version < 1.22
 2. kubctl
 3. helm - version 3+
 
@@ -11,10 +11,18 @@ instructions:
 1. run command : helm repo add bitnami https://charts.bitnami.com/bitnami
 2. run command : helm install my-release -f var.yaml bitnami/mongodb
 3. run command : helm install nginx-controller bitnami/nginx-ingress-controller
-4. run command : k apply -f .
+3  config your dns to follow external IP of nginx controller
+4. run command : helm install crm ./crm-demo
+5. run command : kubectl create namespace cert-manager
+6. run command : kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.1/cert-manager.crds.yaml
+7. run command : kubectl apply -f letsencrypt-prod.yaml
+8. run command : helm install cert-manager --namespace cert-manager jetstack/cert-manager --version v0.14.1
+
+
 
 cronJob:
 before you apply cronjJob
 1. connect to primary pod 
 2. connection to host:
    mongo "mongodb://<user>:<pass>@127.0.0.1/<database name>" 
+
