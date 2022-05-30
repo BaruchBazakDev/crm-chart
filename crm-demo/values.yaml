@@ -16,7 +16,7 @@ service:
 
 # deployment variables for crm-demo app
 deployment:
-  replicaset: 2
+  replicaset: 5
   request:
     cpu: "90m"
     memory: "55Mi"
