@@ -6,4 +6,7 @@ source:
 destination:
   server: 'https://kubernetes.default.svc'
   namespace: default
-syncPolicy: {}
+spec:
+  syncPolicy:
+    automated: {}
+
