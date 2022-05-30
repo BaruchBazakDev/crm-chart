@@ -16,7 +16,7 @@ service:
 
 # deployment variables for crm-demo app
 deployment:
-  replicaset: 3
+  replicaset: 2
   request:
     cpu: "90m"
     memory: "55Mi"
@@ -25,7 +25,7 @@ deployment:
 # cronJob variables for crm-demo app
 cronJob:
   # Scheduling work, default every day on 00:00
-  schedule: "0 2 * * *"
+  schedule: "0 23 * * *"
   # Mongo command to exec - default db.clients.remove({})
   command: "db.clients.remove({});"
   # Uri to primary mongo pod 
