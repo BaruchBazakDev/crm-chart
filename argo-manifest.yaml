@@ -1,0 +1,9 @@
+project: default
+source:
+  repoURL: 'https://github.com/BaruchBazakDev/crm-chart.git'
+  path: crm-demo
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: default
+syncPolicy: {}
